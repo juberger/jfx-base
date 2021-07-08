@@ -7,10 +7,10 @@ import javax.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import fr.jbnsoft.jfx.JfxApplication;
+import fr.jbnsoft.jfx.component.AbstractComponent;
 import fr.jbnsoft.jfx.controller.AbstractController;
-import fr.jbnsoft.jfx.controller.AppFXMLLoader;
 import fr.jbnsoft.jfx.exception.JfxException;
-import javafx.fxml.FXMLLoader;
+import fr.jbnsoft.jfx.service.ComponentService;
 import javafx.scene.Scene;
 
 public abstract class AbstractView implements IView {
@@ -24,7 +24,7 @@ public abstract class AbstractView implements IView {
 	// ------------------------------------------------
 
 	@Autowired
-	private AppFXMLLoader appFXMLLoader;
+	ComponentService componentService;
 	@Autowired
 	private JfxApplication application;
 	private Scene scene;
@@ -37,12 +37,20 @@ public abstract class AbstractView implements IView {
 	@Override
 	public void onStart() {
 		if (viewController != null) {
-			viewController.onStrart();
+			viewController.onStart();
 		}
 	}
 
-	public FXMLLoader getLoader(URL url) throws JfxException {
-		return appFXMLLoader.getLoader(url);
+	public <T extends AbstractComponent<?, ?>> T loadComponent(Class<T> componentType) throws JfxException {
+		return componentService.load(componentType);
+	}
+
+	public <T extends AbstractComponent<?, ?>> T loadComponent(URL fxml, Class<T> componentType) throws JfxException {
+		return componentService.load(fxml, componentType);
+	}
+
+	public <T extends AbstractComponent<?, ?>> T loadComponent(String fxml, Class<T> componentType) throws JfxException {
+		return componentService.load(fxml, componentType);
 	}
 	
 	// ------------------------------------------------
@@ -52,6 +60,9 @@ public abstract class AbstractView implements IView {
 	@PostConstruct
 	private void init() throws JfxException {
 		createScene();
+		if (viewController != null) {
+			viewController.onInit();
+		}
 	}
 	
 	// ------------------------------------------------
@@ -64,14 +75,6 @@ public abstract class AbstractView implements IView {
 
 	public void setApplication(JfxApplication application) {
 		this.application = application;
-	}
-
-	public AppFXMLLoader getAppFXMLLoader() {
-		return appFXMLLoader;
-	}
-
-	public void setAppFXMLLoader(AppFXMLLoader appFXMLLoader) {
-		this.appFXMLLoader = appFXMLLoader;
 	}
 
 	public Scene getScene() {

@@ -16,13 +16,13 @@ public class ErrorComponent {
 	
 	private String title;
 	private String details;
-	private AbstractController owner;
+	private AbstractController<?> owner;
 
 	// ------------------------------------------------
 	// - Methods
 	// ------------------------------------------------
 
-	public ErrorComponent(String title, String details, AbstractController owner) {
+	public ErrorComponent(String title, String details, AbstractController<?> owner) {
 		this.title = title;
 		this.details = details;
 		this.owner = owner;

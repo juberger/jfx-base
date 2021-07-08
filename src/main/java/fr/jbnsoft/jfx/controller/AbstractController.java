@@ -1,6 +1,14 @@
 package fr.jbnsoft.jfx.controller;
 
+import java.net.URL;
+
+import org.springframework.beans.factory.annotation.Autowired;
+
+import fr.jbnsoft.jfx.component.AbstractComponent;
 import fr.jbnsoft.jfx.component.ErrorComponent;
+import fr.jbnsoft.jfx.exception.JfxException;
+import fr.jbnsoft.jfx.service.ComponentService;
+import javafx.fxml.FXML;
 import javafx.scene.Node;
 
 public abstract class AbstractController<N extends Node> {
@@ -12,11 +20,11 @@ public abstract class AbstractController<N extends Node> {
 	// ------------------------------------------------
 	// - Variables
 	// ------------------------------------------------
+
+	@Autowired
+	ComponentService componentService;
 	
-//	@Autowired
-//	protected AppFXMLLoader appFXMLLoader;
-	
-	private N rootNode;
+	@FXML private N rootNode;
 	
 	private AbstractController<?> parent;
 
@@ -26,23 +34,44 @@ public abstract class AbstractController<N extends Node> {
 	// - Methods
 	// ------------------------------------------------
 	
-	public abstract void onStrart();
+	/**
+	 * Method to initialize the content of the panel associated to the controller
+	 */
+	public abstract void onInit();
+	
+	public void onStart() {};
 	
 	public void createErrorComponent(String title, String details) {};
-	
-//	protected AbstractDialogController loadDialog(String path) throws IOException, JfxException {
-//		FXMLLoader fxmlLoader = appFXMLLoader.getLoader(path);
-//		fxmlLoader.load();
-//		AbstractDialogController dialogController = fxmlLoader.getController();
-//		dialogController.setParent(this);
-//		
-//		return dialogController;
-//	}
 
+	public <T extends AbstractComponent<?, ?>> T loadComponent(Class<T> componentType) throws JfxException {
+		T component = componentService.load(componentType);
+		if (component.getController() != null) {
+			component.getController().onInit();
+		}
+		return component;
+	}
+
+	public <T extends AbstractComponent<?, ?>> T loadComponent(URL fxml, Class<T> componentType) throws JfxException {
+		T component = componentService.load(fxml, componentType);
+		if (component.getController() != null) {
+			component.getController().onInit();
+		}
+		return component;
+	}
+
+	public <T extends AbstractComponent<?, ?>> T loadComponent(String fxml, Class<T> componentType) throws JfxException {
+		T component = componentService.load(fxml, componentType);
+		if (component.getController() != null) {
+			component.getController().onInit();
+		}
+		return component;
+	}
+	
 	// ------------------------------------------------
 	// - Internal methods
 	// ------------------------------------------------
 
+	
 	// ------------------------------------------------
 	// - Getter / Setter
 	// ------------------------------------------------

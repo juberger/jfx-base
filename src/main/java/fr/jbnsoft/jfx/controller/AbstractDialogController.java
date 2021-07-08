@@ -21,17 +21,26 @@ public abstract class AbstractDialogController<N extends Node> extends AbstractC
 	
 	protected Stage dialogStage;
 	
+	protected Stage parentStage;
+	
 	protected boolean okClicked = false;
 
 	// ------------------------------------------------
 	// - Methods
 	// ------------------------------------------------
 	
-	public abstract Stage createDialog(Parent page);
+	protected abstract Stage createDialog(Parent page);
 	
 	public Stage createDialog() {
-		onStrart();
+		onStart();
 		return createDialog(this.page);
+	}
+	
+	public Stage createDialog(Stage parentStage) {
+		this.parentStage = parentStage;
+		Stage stage = createDialog();
+		stage.initOwner(parentStage);
+		return stage;
 	}
 
 	// ------------------------------------------------
@@ -48,6 +57,14 @@ public abstract class AbstractDialogController<N extends Node> extends AbstractC
 
 	public void setDialogStage(Stage dialogStage) {
 		this.dialogStage = dialogStage;
+	}
+
+	public Stage getParentStage() {
+		return parentStage;
+	}
+
+	public void setParentStage(Stage parentStage) {
+		this.parentStage = parentStage;
 	}
 
 	public boolean isOkClicked() {

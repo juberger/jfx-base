@@ -30,6 +30,17 @@ public class ComponentService {
 	// - Methods
 	// ------------------------------------------------
 
+	public <T extends AbstractComponent<?, ?>> T load(Class<T> componentType) throws JfxException {
+		try {
+			Constructor<T> componentConstructor = componentType.getConstructor();
+			T component = componentConstructor.newInstance();
+			component.load(appFXMLLoader);
+			return component;
+		} catch (NoSuchMethodException | SecurityException | IllegalArgumentException | InvocationTargetException | InstantiationException | IllegalAccessException | IOException e) {
+			throw new JfxException("Unabled to instanciate compoenent type " + componentType.getCanonicalName(), e);
+		}
+	}
+	
 	public <T extends AbstractComponent<?, ?>> T load(URL fxml, Class<T> componentType) throws JfxException {
 		try {
 			Constructor<T> componentConstructor = componentType.getConstructor(URL.class);
