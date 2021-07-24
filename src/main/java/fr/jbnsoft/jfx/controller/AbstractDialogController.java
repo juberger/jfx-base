@@ -1,9 +1,6 @@
 package fr.jbnsoft.jfx.controller;
 
-import javafx.fxml.FXML;
 import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 public abstract class AbstractDialogController<N extends Node> extends AbstractController<N> {
@@ -16,33 +13,36 @@ public abstract class AbstractDialogController<N extends Node> extends AbstractC
 	// - Variables
 	// ------------------------------------------------
 	
-	@FXML
-	protected AnchorPane page;
-	
 	protected Stage dialogStage;
 	
-	protected Stage parentStage;
+	protected boolean validate = false;
 	
-	protected boolean okClicked = false;
-
 	// ------------------------------------------------
 	// - Methods
 	// ------------------------------------------------
 	
-	protected abstract Stage createDialog(Parent page);
+	public abstract void onOpenDialog();
 	
-	public Stage createDialog() {
-		onStart();
-		return createDialog(this.page);
+	/**
+	 * Close dialog with validate flag to false
+	 * @return the validate flag
+	 */
+	public boolean cancelClose() {
+		dialogStage.close();
+		validate = false;
+		return validate;
 	}
 	
-	public Stage createDialog(Stage parentStage) {
-		this.parentStage = parentStage;
-		Stage stage = createDialog();
-		stage.initOwner(parentStage);
-		return stage;
+	/**
+	 * Close dialog with validate flag to true
+	 * @return the validate flag
+	 */
+	public boolean valideClose() {
+		dialogStage.close();
+		validate = true;
+		return validate;
 	}
-
+	
 	// ------------------------------------------------
 	// - Internal methods
 	// ------------------------------------------------
@@ -59,20 +59,12 @@ public abstract class AbstractDialogController<N extends Node> extends AbstractC
 		this.dialogStage = dialogStage;
 	}
 
-	public Stage getParentStage() {
-		return parentStage;
+	public boolean isValidate() {
+		return validate;
 	}
 
-	public void setParentStage(Stage parentStage) {
-		this.parentStage = parentStage;
-	}
-
-	public boolean isOkClicked() {
-		return okClicked;
-	}
-
-	public void setOkClicked(boolean okClicked) {
-		this.okClicked = okClicked;
+	public void setValidate(boolean validate) {
+		this.validate = validate;
 	}
 
 }

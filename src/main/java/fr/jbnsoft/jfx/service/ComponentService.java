@@ -37,7 +37,7 @@ public class ComponentService {
 			component.load(appFXMLLoader);
 			return component;
 		} catch (NoSuchMethodException | SecurityException | IllegalArgumentException | InvocationTargetException | InstantiationException | IllegalAccessException | IOException e) {
-			throw new JfxException("Unabled to instanciate compoenent type " + componentType.getCanonicalName(), e);
+			throw new JfxException("Unabled to instanciate component type " + componentType.getCanonicalName(), e);
 		}
 	}
 	
@@ -48,7 +48,7 @@ public class ComponentService {
 			component.load(appFXMLLoader);
 			return component;
 		} catch (NoSuchMethodException | SecurityException | IllegalArgumentException | InvocationTargetException | InstantiationException | IllegalAccessException | IOException e) {
-			throw new JfxException("Unabled to instanciate compoenent type " + componentType.getCanonicalName(), e);
+			throw new JfxException("Unabled to instanciate component type " + componentType.getCanonicalName(), e);
 		}
 	}
 
@@ -59,7 +59,7 @@ public class ComponentService {
 			component.load(appFXMLLoader);
 			return component;
 		} catch (NoSuchMethodException | SecurityException | IllegalArgumentException | InvocationTargetException | InstantiationException | IllegalAccessException | IOException e) {
-			throw new JfxException("Unabled to instanciate compoenent type " + componentType.getCanonicalName(), e);
+			throw new JfxException("Unabled to instanciate component type " + componentType.getCanonicalName(), e);
 		}
 	}
 	
