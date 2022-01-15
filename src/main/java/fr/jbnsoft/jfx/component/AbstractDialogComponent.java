@@ -3,6 +3,7 @@ package fr.jbnsoft.jfx.component;
 import java.io.IOException;
 import java.net.URL;
 
+import fr.jbnsoft.jfx.component.event.DialogListener;
 import fr.jbnsoft.jfx.controller.AbstractDialogController;
 import javafx.scene.Node;
 import javafx.scene.Parent;
@@ -72,11 +73,16 @@ public abstract class AbstractDialogComponent<T extends AbstractDialogController
 	}
 
 	public void openDialog() {
+		openDialog(null);
+	}
+	
+	public void openDialog(DialogListener dialogListener) {
 		if (dialogStage == null) {
 			createDialog();
 		}
 		getController().setValidate(false);
 		getController().onOpenDialog();
+		getController().setDialogListener(dialogListener);
 		dialogStage.showAndWait();
 	}
 
