@@ -18,7 +18,7 @@
 		<javax.inject.version>1</javax.inject.version>
 		<spring.boot.version>2.5.1</spring.boot.version>
 		<javafx.version>16</javafx.version>
-		<jfx-base.version>0.0.3</jfx-base.version>
+		<jfx-base.version>1.0.0</jfx-base.version>
 	</properties>
 
 	<dependencies>
