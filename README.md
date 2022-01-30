@@ -26,9 +26,9 @@ Et pour finir il vous faut ajouter la dépendance vers la lib jfx-base :
 
 ```xml
 <dependency>
-	<groupId>fr.jbnsoft.library</groupId>
-	<artifactId>jfx-base</artifactId>
-	<version>0.0.3</version>
+    <groupId>fr.jbnsoft.library</groupId>
+    <artifactId>jfx-base</artifactId>
+    <version>0.0.3</version>
 </dependency>
 ```
 
@@ -49,17 +49,74 @@ Afin de pouvoir utiliser le chargement des composants via le context Spring i lf
 ```java
 @Configuration
 public class AppConfiguration {
-	
-	@Bean
-	public AppFXMLLoader getAppFXMLLoader() {
-		return new AppFXMLLoader();
+
+    @Bean
+    public AppFXMLLoader getAppFXMLLoader() {
+        return new AppFXMLLoader();
+    }
+
+    @Bean
+    public ComponentService getComponentService() {
+        return new ComponentService();
+    }
+
+}
+```
+
+## 3 - Classes du projet
+
+Une fois votre projet initialisé et configuré, vous pouvez commencer à créer les classes pour les différentes parties.
+
+### 3.1 - Main classe
+
+La main classe du projet doit étendre *fr.jbnsoft.jfx.JfxApplication* et être annotée *@SpringBootApplication*.
+
+```java
+package fr.monprojet.monprojetjfx;
+
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+
+import fr.jbnsoft.jfx.JfxApplication;
+import javafx.stage.Stage;
+
+@SpringBootApplication
+public class MonProjetJfx extends JfxApplication {
+
+	@Override
+	public void start(Stage primaryStage) throws Exception {
+		// TODO Auto-generated method stub
+		
 	}
 
-	@Bean
-	public ComponentService getComponentService() {
-		return new ComponentService();
-	}
+}
+```
 
+Ajouter la méthode *main* pour lancer l'application JavaFX et la méthode *init* pour lancer l'application Spring Boot.
+
+La méthode *init* set le context Spring une fois l'application Spring Boot démarré.
+
+```java
+public static void main(String[] args) {
+	launch(MonProjetJfx.class, args);
+}
+
+@Override
+public void init() throws Exception {
+	context = SpringApplication.run(MonProjetJfx.class);
+}
+```
+
+Afficher la fenêtre principal de l'application avec le stage.
+
+```java
+@Override
+public void start(Stage primaryStage) throws Exception {
+	primaryStage.setTitle("Mon Projet Jfx");
+	primaryStage.setMinWidth(1280);
+	primaryStage.setMinHeight(800);
+	primaryStage.setWidth(1280);
+	primaryStage.setHeight(800);
+	primaryStage.show();
 }
 
 ```

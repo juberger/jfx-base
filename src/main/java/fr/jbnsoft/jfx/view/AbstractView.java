@@ -11,6 +11,7 @@ import fr.jbnsoft.jfx.component.AbstractComponent;
 import fr.jbnsoft.jfx.controller.AbstractController;
 import fr.jbnsoft.jfx.exception.JfxException;
 import fr.jbnsoft.jfx.service.ComponentService;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 
 public abstract class AbstractView implements IView {
@@ -51,6 +52,13 @@ public abstract class AbstractView implements IView {
 
 	public <T extends AbstractComponent<?, ?>> T loadComponent(String fxml, Class<T> componentType) throws JfxException {
 		return componentService.load(fxml, componentType);
+	}
+	
+	public <T extends AbstractComponent<?, ?>> Scene buildScene(Class<T> componentType) throws JfxException {
+		T component = loadComponent(componentType);
+		setViewController(component.getController());
+		setScene(new Scene((Parent) component.getRootNode()));
+		return scene;
 	}
 	
 	// ------------------------------------------------
