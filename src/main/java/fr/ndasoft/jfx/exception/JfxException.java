@@ -1,4 +1,4 @@
-package fr.jbnsoft.jfx.exception;
+package fr.ndasoft.jfx.exception;
 
 public class JfxException extends Exception {
 	

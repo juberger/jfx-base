@@ -1,4 +1,4 @@
-package fr.jbnsoft.jfx.component.event;
+package fr.ndasoft.jfx.component.event;
 
 public class DialogEvent {
 
@@ -8,6 +8,7 @@ public class DialogEvent {
 
 	public static final String ACTION_VALIDATE = "validate";
 	public static final String ACTION_CLOSE = "close";
+	public static final String ACTION_CANCEL = "cancel";
 	
 	// ------------------------------------------------
 	// - Variables

@@ -1,8 +1,8 @@
-package fr.jbnsoft.jfx;
+package fr.ndasoft.jfx;
 
 import org.springframework.context.ConfigurableApplicationContext;
 
-import fr.jbnsoft.jfx.view.AbstractView;
+import fr.ndasoft.jfx.view.AbstractView;
 import javafx.application.Application;
 import javafx.scene.Scene;
 

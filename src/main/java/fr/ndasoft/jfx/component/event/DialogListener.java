@@ -1,4 +1,4 @@
-package fr.jbnsoft.jfx.component.event;
+package fr.ndasoft.jfx.component.event;
 
 public interface DialogListener {
 

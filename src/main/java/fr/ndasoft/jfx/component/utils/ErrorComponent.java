@@ -1,10 +1,10 @@
-package fr.jbnsoft.jfx.component;
+package fr.ndasoft.jfx.component.utils;
 
-import fr.jbnsoft.jfx.controller.AbstractController;
+import fr.ndasoft.jfx.component.IJfxComponent;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 
-public class ErrorComponent {
+public class ErrorComponent implements IJfxComponent {
 
 	// ------------------------------------------------
 	// - Constants
@@ -16,22 +16,22 @@ public class ErrorComponent {
 	
 	private String title;
 	private String details;
-	private AbstractController<?> owner;
+	private IJfxComponent parent;
 
 	// ------------------------------------------------
 	// - Methods
 	// ------------------------------------------------
 
-	public ErrorComponent(String title, String details, AbstractController<?> owner) {
+	public ErrorComponent(String title, String details, IJfxComponent parent) {
 		this.title = title;
 		this.details = details;
-		this.owner = owner;
+		this.parent = parent;
 	}
 	
 	public boolean displayError() {
 		boolean displayed = false;
 		
-		if (title != null && !title.isEmpty() && details != null && !details.isEmpty() && owner != null) {
+		if (title != null && !title.isEmpty() && details != null && !details.isEmpty() && parent != null) {
 			Alert alert = new Alert(AlertType.ERROR);
 			alert.setTitle("Error message");
 			alert.setHeaderText(title);
