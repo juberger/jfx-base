@@ -18,7 +18,7 @@
 		<javax.inject.version>1</javax.inject.version>
 		<spring.boot.version>2.5.1</spring.boot.version>
 		<javafx.version>16</javafx.version>
-		<jfx-base.version>1.0.0</jfx-base.version>
+		<jfx-base.version>1.0.2</jfx-base.version>
 	</properties>
 
 	<dependencies>
@@ -57,7 +57,7 @@
 		<!-- Third party -->
 
 		<dependency>
-			<groupId>fr.jbnsoft.library</groupId>
+			<groupId>fr.ndasoft.library</groupId>
 			<artifactId>jfx-base</artifactId>
 			<version>${jfx-base.version}</version>
 		</dependency>
