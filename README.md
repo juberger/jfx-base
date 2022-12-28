@@ -44,7 +44,7 @@ Puis configurer le **GAV** avec les informations de votre projet et mettre à jo
 
 ### 2.1 - Configuration des beans
 
-Afin de pouvoir utiliser le chargement des composants via le context Spring i lfaut ajouter la configuration suivante à votre projet :
+Afin de pouvoir utiliser le chargement des composants via le context Spring il faut ajouter la configuration suivante à votre projet :
 
 ```java
 @Configuration
